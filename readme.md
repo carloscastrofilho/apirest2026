@@ -39,3 +39,27 @@ como iniciar o projeto, acesse o terminal e execute o comando abaixo:
 ```bash
     npm run dev
 ```
+
+banco de dados utilizado no projeto: `mysql`
+
+depdencia utilizadao `mysql2`:
+
+```bash
+    npm install mysql2
+```
+
+
+```sql
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT,
+    userName VARCHAR(100),
+    userPassword VARCHAR(250),
+    CONSTRAINT PK_USERS_ID PRIMARY KEY (id)
+);
+
+INSERT INTO users (`userName`, `userPassword`) VALUES 
+('jose@gmail.com', '123'),
+('marcos@etec.sp.go.br','234'),
+('mario@fate.sp.go.br','567'),
+('bruno@hotmail','890');
+```
