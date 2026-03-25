@@ -63,3 +63,5 @@ INSERT INTO users (`userName`, `userPassword`) VALUES
 ('mario@fate.sp.go.br','567'),
 ('bruno@hotmail','890');
 ```
+
+para sincrominar o repositorio remoto
