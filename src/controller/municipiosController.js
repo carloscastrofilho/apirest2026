@@ -1,4 +1,4 @@
-import * as myModel from "../model/usersModel.js"
+import * as myModel from "../model/municipiosModel.js"
 
 // metodo get = verbo get
 export async function Get(req,res){
@@ -51,7 +51,7 @@ export async function Post(req,res){
             res.status(415).json({"message":"erro", "Error": "Falha sem Body..."});       
         }
         const response = await myModel.Post(dataBody);
-         if (response.message.toLowerCase() == "success".toLowerCase() ) {
+         if (response.message == "Success" ) {
             res.status(201).json(response);
         } else {
             res.status(400).json(response);

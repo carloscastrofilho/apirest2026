@@ -1,6 +1,6 @@
-@host = http://192.168.10.48
+@host = http://localhost
 @port = 3500
-@endpoint = users
+@endpoint = estados
 
 @url = {{host}}:{{port}}/{{endpoint}} 
 
@@ -9,7 +9,7 @@ GET {{url}}
 
 ###
 # getById
-GET {{url}}/5
+GET {{url}}/4
 
 ###
 # inclui novos registros
@@ -17,19 +17,20 @@ POST  {{url}}
 Content-Type: application/json; charset=utf-8
 
 {
-      "userName": "provara022@fatec.com",
-      "userPassword": "022"
+      "estado": "Brasilia",
+      "uf": "DF"
     }
 
 ###
 
-PUT  {{url}}/5
+PUT  {{url}}/4
 Content-Type: application/json; charset=utf-8
 
 {
-    "userName": "teste.022",
-    "userPassword": "123-456"    
-}
+      "estado": "Distrito Federal",
+      "uf": "DF"
+    }
+
 
 ###
-DELETE  {{url}}/2
+DELETE  {{url}}/4

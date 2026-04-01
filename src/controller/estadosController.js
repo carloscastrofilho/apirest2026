@@ -1,4 +1,4 @@
-import * as myModel from "../model/usersModel.js"
+import * as myModel from "../model/estadosModel.js"
 
 // metodo get = verbo get
 export async function Get(req,res){

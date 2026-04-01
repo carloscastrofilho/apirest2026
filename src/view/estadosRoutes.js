@@ -1,7 +1,7 @@
 import { Router } from "express";
-import * as mycontroller from "../controller/usersController.js"
+import * as mycontroller from "../controller/estadosController.js"
 
-const endPoint = "/users";
+const endPoint = "/estados";
 
 const router = Router();
 

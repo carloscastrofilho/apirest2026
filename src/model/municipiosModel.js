@@ -1,25 +1,22 @@
 import { pool } from "../databases/connectionMysql.js"
+const tableName = "municipios";
 
 export async function Get ( req, res)  {
     try {
         const [results, fields] = await pool.execute(
-            'SELECT * FROM `users` ORDER BY `userName` '
+            `SELECT * FROM ${tableName} ORDER BY id `
         );
         return {"message":"Success","data":results} ;
-        console.log(results); 
-        // console.log(fields); 
-        //res.status(202).json();
     } catch (error) {
         console.log(error);
-        return {"message": "error", "Error": error.message}
-        // res.status(403).json({"message": err})
+        return {"message": "error", "Error": error.message};
     }
 }
 
 export async function GetById(id){
     try {
         const [results, fields] = await pool.execute(
-            'SELECT * FROM `users` WHERE id = ? ORDER BY `userName` ',
+            `SELECT * FROM ${tableName} WHERE id = ? ORDER BY id `,
             [id]
         );
         return {"message":"Success","data":results} ;
@@ -28,11 +25,10 @@ export async function GetById(id){
     }
 }
 
-
 export async function Delete(id){
     try {
         const [results, fields] = await pool.execute(
-            'DELETE FROM `users` WHERE id = ?',
+            `DELETE FROM ${tableName} WHERE id = ?`,
             [id]
         );
         return {"message":"Success","data":results} ;
@@ -43,10 +39,10 @@ export async function Delete(id){
 
 export async function Post( data ){
     try {
-        const {userName, userPassword} = data;
+        const {municipio, uf } = data;
         const [results, fields] = await pool.execute(
-            'INSERT INTO `users` (userName, userPassword) VALUES ( ? , ?)',
-            [userName , userPassword]
+            `INSERT INTO ${tableName} (municipio, uf) VALUES ( ? , ?)`,
+            [municipio , uf ]
         );
         return {"message":"Success","data":results} ;
     } catch (error) {
@@ -57,14 +53,13 @@ export async function Post( data ){
 
 export async function Put( data, id ){
     try {
-        const {userName, userPassword} = data;
+        const { municipio, uf } = data;
         const [results, fields] = await pool.execute(
-            'UPDATE `users` SET userName = ?, userPassword = ? WHERE id = ?',
-            [userName , userPassword, id]
+            `UPDATE ${tableName} SET municipio = ?, uf = ? WHERE id = ?`,
+            [ municipio , uf , id]
         );
         return {"message":"Success","data":results} ;
     } catch (error) {
         return {"message": "error", "Error": error.message} 
     }
-
 }

@@ -1,6 +1,6 @@
 @host = http://192.168.10.48
 @port = 3500
-@endpoint = users
+@endpoint = municipios
 
 @url = {{host}}:{{port}}/{{endpoint}} 
 
@@ -9,7 +9,7 @@ GET {{url}}
 
 ###
 # getById
-GET {{url}}/5
+GET {{url}}/2
 
 ###
 # inclui novos registros
@@ -17,19 +17,19 @@ POST  {{url}}
 Content-Type: application/json; charset=utf-8
 
 {
-      "userName": "provara022@fatec.com",
-      "userPassword": "022"
-    }
-
-###
-
-PUT  {{url}}/5
-Content-Type: application/json; charset=utf-8
-
-{
-    "userName": "teste.022",
-    "userPassword": "123-456"    
+  "municipio": "Ibitinga",
+   "UF": "SP"
 }
 
 ###
-DELETE  {{url}}/2
+
+PUT  {{url}}/6
+Content-Type: application/json; charset=utf-8
+
+{
+  "municipio": "Itápolis",
+   "uf": "SP"
+}
+
+###
+DELETE  {{url}}/6
