@@ -1,0 +1,36 @@
+@host = http://localhost
+@port = 3500
+@endpoint = dependencias
+
+@url = {{host}}:{{port}}/{{endpoint}} 
+
+###
+GET {{url}}
+
+###
+# getById
+GET {{url}}/4
+
+###
+# inclui novos registros
+POST  {{url}}
+Content-Type: application/json; charset=utf-8
+
+{
+      "dependencia": "lab-2",
+      "capacidade": "30"
+    }
+
+###
+
+PUT  {{url}}/4
+Content-Type: application/json; charset=utf-8
+
+{
+    "dependencia": "lab-4",
+      "capacidade": "32"
+    }
+
+
+###
+DELETE  {{url}}/4

@@ -1,5 +1,5 @@
 import { db } from "../databases/DatabaseContext.js";
-const tableName = "estados";
+const tableName = "dependencias";
 
 export async function Get ( req, res)  {
     try {
@@ -39,13 +39,15 @@ export async function Delete(id){
 
 export async function Post( data ){
     try {
-        const {estado, uf } = data;
+        const {dependencia, capacidade } = data;
+        
         const results = await db.execute(
-            `INSERT INTO ${tableName} (estado, uf) VALUES ( ? , ?)`,
-            [estado , uf ]
+            `INSERT INTO ${tableName} (dependencia, capacidade) VALUES ( ? , ?)`,
+            [dependencia , capacidade ]
         );
         return {"message":"Success","data":results} ;
     } catch (error) {
+        console.log( error, error.message);
         return {"message": "error", "Error": error.message} 
     }
 
@@ -53,10 +55,10 @@ export async function Post( data ){
 
 export async function Put( data, id ){
     try {
-        const { estado, uf } = data;
-        const results= await db.execute(
-            `UPDATE ${tableName} SET estado = ?, uf = ? WHERE id = ?`,
-            [ estado , uf , id]
+        const { dependencia, capacidade } = data;
+        const results = await db.execute(
+            `UPDATE ${tableName} SET dependencia = ?, capacidade = ? WHERE id = ?`,
+            [ dependencia , capacidade , id]
         );
         return {"message":"Success","data":results} ;
     } catch (error) {

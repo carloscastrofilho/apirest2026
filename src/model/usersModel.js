@@ -1,8 +1,8 @@
-import { pool } from "../databases/connectionMysql.js"
+import { db } from "../databases/DatabaseContext.js";
 
 export async function Get ()  {
     try {
-        const [results, fields] = await pool.execute(
+        const results =  await db.execute(
             'SELECT * FROM `users` ORDER BY `userName` '
         );
         return {"message":"Success","data":results} ;
@@ -15,7 +15,7 @@ export async function Get ()  {
 
 export async function GetById(id){
     try {
-        const [results, fields] = await pool.execute(
+        const results =  await db.execute(
             'SELECT * FROM `users` WHERE id = ? ORDER BY `userName` ',
             [id]
         );
@@ -28,7 +28,7 @@ export async function GetById(id){
 
 export async function Delete(id){
     try {
-        const [results, fields] = await pool.execute(
+        const results =  await db.execute(
             'DELETE FROM `users` WHERE id = ?',
             [id]
         );
@@ -41,7 +41,7 @@ export async function Delete(id){
 export async function Post( data ){
     try {
         const {userName, userPassword} = data;
-        const [results, fields] = await pool.execute(
+        const results =  await db.execute(
             'INSERT INTO `users` (userName, userPassword) VALUES ( ? , ?)',
             [userName , userPassword]
         );
@@ -55,7 +55,7 @@ export async function Post( data ){
 export async function Put( data, id ){
     try {
         const {userName, userPassword} = data;
-        const [results, fields] = await pool.execute(
+        const results =  await db.execute(
             'UPDATE `users` SET userName = ?, userPassword = ? WHERE id = ?',
             [userName , userPassword, id]
         );

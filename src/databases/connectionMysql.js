@@ -1,10 +1,19 @@
 import mysql from "mysql2/promise";
+import dotenv from 'dotenv';
+dotenv.config();
+
+const DB_HOST = process.env.DB_HOST || 'localhost';
+const DB_USER = process.env.DB_USER || 'root';
+const DB_PORT = process.env.DB_PORT || 3306 ;
+const DB_DATABASE = process.env.DB_DATABASE || 'mysql';
+const DB_PASSWORD = process.env.DB_PASSWORD || '';
 
 export const pool = mysql.createPool({
-            host: 'localhost',
-            user: 'root',
-            port: 3306,
-            database: 'apirest'
+            host: DB_HOST,
+            user: DB_USER,
+            port: DB_PORT,
+            password: DB_PASSWORD,
+            database: DB_DATABASE
         });
 
 export async function testConnection() {
