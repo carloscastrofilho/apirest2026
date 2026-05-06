@@ -6,8 +6,9 @@ export class DatabaseSchema {
         const queries = [
             `CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                userName TEXT NOT NULL,
-                userPassword TEXT NOT NULL
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                password TEXT NOT NULL
             )`,
 
             `CREATE TABLE IF NOT EXISTS estados (

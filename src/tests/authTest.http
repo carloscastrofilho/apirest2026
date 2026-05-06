@@ -1,6 +1,6 @@
 @host = http://localhost
 @port = 3500
-@endpoint = users
+@endpoint = auth
 
 @url = {{host}}:{{port}}/{{endpoint}} 
 
@@ -8,12 +8,21 @@
 GET {{url}}
 
 ###
-# getById
-GET {{url}}/10
+# registrar um novo usuario
+POST  {{url}}/register
+Content-Type: application/json; charset=utf-8
+
+{
+      "name": "prova 020",
+      "password": "020",
+      "email" : "provara020@fatec.com"
+    }
+
+###
 
 ###
 # inclui novos registros
-POST  {{url}}
+POST  {{url}}/login
 Content-Type: application/json; charset=utf-8
 
 {

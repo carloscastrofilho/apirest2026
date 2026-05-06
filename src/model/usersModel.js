@@ -3,7 +3,7 @@ import { db } from "../databases/DatabaseContext.js";
 export async function Get ()  {
     try {
         const results =  await db.execute(
-            'SELECT * FROM `users` ORDER BY `userName` '
+            'SELECT * FROM `users` ORDER BY `id` '
         );
         return {"message":"Success","data":results} ;
  
@@ -16,7 +16,7 @@ export async function Get ()  {
 export async function GetById(id){
     try {
         const results =  await db.execute(
-            'SELECT * FROM `users` WHERE id = ? ORDER BY `userName` ',
+            'SELECT * FROM `users` WHERE id = ? ORDER BY `id` ',
             [id]
         );
         return {"message":"Success","data":results} ;
@@ -40,10 +40,10 @@ export async function Delete(id){
 
 export async function Post( data ){
     try {
-        const {userName, userPassword} = data;
+        const {name, password, email} = data;
         const results =  await db.execute(
-            'INSERT INTO `users` (userName, userPassword) VALUES ( ? , ?)',
-            [userName , userPassword]
+            'INSERT INTO `users` (name, password, email ) VALUES ( ? , ? , ?)',
+            [name , password, email]
         );
         return {"message":"Success","data":results} ;
     } catch (error) {
@@ -54,14 +54,27 @@ export async function Post( data ){
 
 export async function Put( data, id ){
     try {
-        const {userName, userPassword} = data;
+       const {name, password, email} = data;
         const results =  await db.execute(
-            'UPDATE `users` SET userName = ?, userPassword = ? WHERE id = ?',
-            [userName , userPassword, id]
+            'UPDATE `users` SET name = ?, password = ? , email = ? WHERE id = ?',
+            [name , password, email, id]
         );
         return {"message":"Success","data":results} ;
     } catch (error) {
         return {"message": "error", "Error": error.message} 
     }
 
+}
+
+export async function GetByEmail(email){
+    try {
+        const results =  await db.execute(
+            'SELECT * FROM `users` WHERE email = ? ORDER BY `id` ',
+            [email]
+        );
+
+        return {"message":"Success","data":results} ;
+    } catch (error) {
+       return {"message": "error", "Error": error.message} 
+    }
 }
