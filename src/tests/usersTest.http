@@ -9,7 +9,7 @@ GET {{url}}
 
 ###
 # getById
-GET {{url}}/10
+GET {{url}}/13
 
 ###
 # inclui novos registros
@@ -34,3 +34,5 @@ Content-Type: application/json; charset=utf-8
 
 ###
 DELETE  {{url}}/12
+Content-Type: application/json; charset=utf-8
+

@@ -24,10 +24,18 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
+    const user = await UserModel.GetByEmail(email);
+
     if (!user) return res.status(401).json({ message: 'Credenciais inválidas' });
-    const valid = await bcrypt.compare(password, user.password);
+
+    const responseData = user.data[0];
+    
+    const valid = await bcrypt.compare(password, responseData.password)
+
     if (!valid) return res.status(401).json({ message: 'Credenciais inválidas' });
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+
+    const token = jwt.sign ({ userId: responseData.id , userName: responseData.name }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    
+    res.json({ "message":"sucess", "data" : token });
+    
 };

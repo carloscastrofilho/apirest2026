@@ -1,4 +1,6 @@
 import { db } from "../databases/DatabaseContext.js";
+import * as sqlutils from "../utils/sqlTextos.js"
+
 const tableName = "estados";
 
 export async function Get ( req, res)  {
@@ -39,10 +41,16 @@ export async function Delete(id){
 
 export async function Post( data ){
     try {
-        const {estado, uf } = data;
-        const results = await db.execute(
-            `INSERT INTO ${tableName} (estado, uf) VALUES ( ? , ?)`,
-            [estado , uf ]
+        
+        const payload = data;
+        sqlutils.extrair_dados( payload );
+        const sqlFields = sqlutils.gerar_sqlFields();
+        const sqlParms = sqlutils.gerar_sqlParams();
+        const sqlValuesParms = sqlutils.listParms();  
+        const sqlTexto = `INSERT INTO ${tableName} ( ${sqlFields} )  VALUES ( ${sqlParms} )`
+        console.log( sqlTexto);
+
+        const results = await db.execute( sqlTexto,  sqlValuesParms
         );
         return {"message":"Success","data":results} ;
     } catch (error) {
@@ -53,10 +61,15 @@ export async function Post( data ){
 
 export async function Put( data, id ){
     try {
-        const { estado, uf } = data;
+        
+        sqlutils.extrair_dados(data) ;
+        const sqlSets = sqlutils.gerar_sqlSets();
+        const sqlValuesParms = sqlutils.listParms() ;
+        sqlValuesParms.push( id );
+
         const results= await db.execute(
-            `UPDATE ${tableName} SET estado = ?, uf = ? WHERE id = ?`,
-            [ estado , uf , id]
+            `UPDATE ${tableName} SET ${sqlSets} WHERE id = ?`,
+            sqlValuesParms
         );
         return {"message":"Success","data":results} ;
     } catch (error) {

@@ -1,45 +1,34 @@
-@host = http://localhost
-@port = 3500
-@endpoint = auth
+### Variáveis Globais
+@baseUrl = http://localhost:3500
+@name = teste2
+@email = teste2@teste.com
+@password = 123456
 
-@url = {{host}}:{{port}}/{{endpoint}} 
-
-###
-GET {{url}}
-
-###
-# registrar um novo usuario
-POST  {{url}}/register
-Content-Type: application/json; charset=utf-8
+### 1. Criar um novo usuário (Sign Up)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
 
 {
-      "name": "prova 020",
-      "password": "020",
-      "email" : "provara020@fatec.com"
-    }
-
-###
-
-###
-# inclui novos registros
-POST  {{url}}/login
-Content-Type: application/json; charset=utf-8
-
-{
-      "name": "prova 022",
-      "password": "022",
-      "email" : "provara022@fatec.com"
-    }
-
-###
-
-PUT  {{url}}/5
-Content-Type: application/json; charset=utf-8
-
-{
-    "userName": "teste.022",
-    "userPassword": "123-456"    
+    "name": " {{name}}",
+    "email" : "{{email}}",
+    "password": "{{password}}"
 }
 
+### 2. Realizar Login (Gera o Token JWT)
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "{{email}}",
+    "password": "{{password}}"
+}
+### Armazenar o token da resposta acima
+@authToken = {{login.response.body.token}}
+
+### 3. Listar Usuários (Rota Protegida)
+GET {{baseUrl}}/users
+Authorization: Bearer {{authToken}}
+
 ###
-DELETE  {{url}}/12
+GET {{baseUrl}}/users/14

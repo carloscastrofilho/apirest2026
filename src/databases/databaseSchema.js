@@ -14,13 +14,15 @@ export class DatabaseSchema {
             `CREATE TABLE IF NOT EXISTS estados (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 estado TEXT NOT NULL,
+                regiao TEXT NULL,
                 uf TEXT NOT NULL
             )`,
             
             `CREATE TABLE IF NOT EXISTS municipios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 municipio TEXT NOT NULL,
-                uf TEXT NOT NULL
+                uf TEXT NOT NULL,
+                populacao INTEGER
             )`,
 
             `CREATE TABLE IF NOT EXISTS bairros (

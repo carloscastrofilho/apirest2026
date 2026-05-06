@@ -1,4 +1,4 @@
-@host = http://192.168.10.48
+@host = http://localhost
 @port = 3500
 @endpoint = municipios
 
@@ -9,7 +9,7 @@ GET {{url}}
 
 ###
 # getById
-GET {{url}}/2
+GET {{url}}/1
 
 ###
 # inclui novos registros
@@ -17,18 +17,20 @@ POST  {{url}}
 Content-Type: application/json; charset=utf-8
 
 {
-  "municipio": "Ibitinga",
-   "UF": "SP"
+  "municipio": "taquaritinga",
+   "UF": "SP",
+   "populacao": 60000
 }
 
 ###
 
-PUT  {{url}}/6
+PUT  {{url}}/1
 Content-Type: application/json; charset=utf-8
 
 {
-  "municipio": "Itápolis",
-   "uf": "SP"
+  "municipio": "Taquaritinga",
+   "uf": "SP",
+   "populacao": 60000
 }
 
 ###
